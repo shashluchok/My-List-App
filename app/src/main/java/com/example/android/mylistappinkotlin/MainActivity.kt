@@ -26,22 +26,20 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        val lists = listDataManager.readLists()
 
         myList = findViewById<RecyclerView>(R.id.rv_my_recycler_view)
         myList.layoutManager = LinearLayoutManager(this)
-        myList.adapter =ListSelectionRecyclerViewAdapter()
+        myList.adapter =ListSelectionRecyclerViewAdapter(lists)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         return when (item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
@@ -55,7 +53,15 @@ class MainActivity : AppCompatActivity() {
         editText.inputType = InputType.TYPE_CLASS_TEXT
         editText.setHint(R.string.enter_your_list_name_here)
         val builder = AlertDialog.Builder(this).setTitle(dialogTitle).setView(editText)
-        builder.setPositiveButton(dialogConfirmation){dialog,_->dialog.dismiss()}
+        builder.setPositiveButton(dialogConfirmation){dialog,_->
+            val list = TaskList(editText.text.toString())
+            listDataManager.saveList(list)
+            val recyclerAdapter = myList.adapter as ListSelectionRecyclerViewAdapter
+            recyclerAdapter.addList(list)
+            dialog.dismiss()
+        }
         builder.create().show()
     }
+
+
 }

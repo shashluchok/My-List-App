@@ -20,4 +20,8 @@ class ListDataManager(private val context: Context) {
         }
         return listOfTaskLists
     }
+    fun deleteList(){
+        val x = PreferenceManager.getDefaultSharedPreferences(context).edit()
+
+    }
 }
