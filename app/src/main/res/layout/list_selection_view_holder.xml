@@ -6,12 +6,22 @@
 
     <TextView
         android:id="@+id/tv_item_number"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"/>
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="4"
         android:layout_height="wrap_content"
         android:id="@+id/tv_item_string"
+        android:layout_margin="16dp"/>
+
+    <Button
+        android:id="@+id/bt_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Remove"
         android:layout_margin="16dp"/>
 </LinearLayout>

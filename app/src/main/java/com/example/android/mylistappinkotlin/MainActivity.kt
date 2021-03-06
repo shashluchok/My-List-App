@@ -1,5 +1,6 @@
 package com.example.android.mylistappinkotlin
 
+import android.app.Application
 import android.os.Bundle
 import android.text.InputType
 import android.view.Menu
@@ -11,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),ListDataManager.WorkOut  {
 
     private lateinit var myList:RecyclerView
     private val listDataManager = ListDataManager(this)
@@ -26,11 +27,11 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val lists = listDataManager.readLists()
+
 
         myList = findViewById<RecyclerView>(R.id.rv_my_recycler_view)
         myList.layoutManager = LinearLayoutManager(this)
-        myList.adapter =ListSelectionRecyclerViewAdapter(lists)
+        readAndSetLists()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -44,6 +45,10 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun readAndSetLists(){
+        myList.adapter = ListSelectionRecyclerViewAdapter(listDataManager.readLists(),this)
     }
 
     private fun showCreateListDialog(){

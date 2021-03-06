@@ -5,6 +5,12 @@ import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 
 class ListDataManager(private val context: Context) {
+
+    interface WorkOut {
+        fun readAndSetLists()
+    }
+    private var listener:WorkOut = context as WorkOut
+
     fun saveList(list:TaskList){
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context).edit()
         sharedPreferences.putStringSet(list.name,list.tasks.toHashSet())
@@ -20,8 +26,11 @@ class ListDataManager(private val context: Context) {
         }
         return listOfTaskLists
     }
-    fun deleteList(){
+    fun deleteList(key: String){
         val x = PreferenceManager.getDefaultSharedPreferences(context).edit()
+        x.remove(key)
+        x.apply()
+        listener.readAndSetLists()
 
     }
 }
