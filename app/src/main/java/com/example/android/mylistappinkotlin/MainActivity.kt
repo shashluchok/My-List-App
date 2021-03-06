@@ -2,21 +2,19 @@ package com.example.android.mylistappinkotlin
 
 import android.os.Bundle
 import android.text.InputType
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import org.intellij.lang.annotations.JdkConstants
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var myList:RecyclerView
+    private val listDataManager = ListDataManager(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             showCreateListDialog()
         }
+
+
 
         myList = findViewById<RecyclerView>(R.id.rv_my_recycler_view)
         myList.layoutManager = LinearLayoutManager(this)
@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity() {
         val editText = EditText(this)
         editText.inputType = InputType.TYPE_CLASS_TEXT
         editText.setHint(R.string.enter_your_list_name_here)
-        AlertDialog.Builder(this).setTitle(dialogTitle).setView(editText).create().show()
+        val builder = AlertDialog.Builder(this).setTitle(dialogTitle).setView(editText)
+        builder.setPositiveButton(dialogConfirmation){dialog,_->dialog.dismiss()}
+        builder.create().show()
     }
 }
