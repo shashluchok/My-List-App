@@ -1,11 +1,12 @@
 package com.example.android.mylistappinkotlin
 
-import android.app.Application
 import android.os.Bundle
+import android.text.InputFilter
 import android.text.InputType
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
+import android.widget.Filter
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity(),ListDataManager.WorkOut  {
 
 
 
-        myList = findViewById<RecyclerView>(R.id.rv_my_recycler_view)
+        myList = findViewById(R.id.rv_my_recycler_view)
         myList.layoutManager = LinearLayoutManager(this)
         readAndSetLists()
     }
@@ -57,6 +58,9 @@ class MainActivity : AppCompatActivity(),ListDataManager.WorkOut  {
         val editText = EditText(this)
         editText.inputType = InputType.TYPE_CLASS_TEXT
         editText.setHint(R.string.enter_your_list_name_here)
+        val filterArray = arrayOf(InputFilter.LengthFilter(15)as InputFilter)
+
+        editText.filters = filterArray
         val builder = AlertDialog.Builder(this).setTitle(dialogTitle).setView(editText)
         builder.setPositiveButton(dialogConfirmation){dialog,_->
             val list = TaskList(editText.text.toString())

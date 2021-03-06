@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:theme="@style/Theme.MyListAppInKotlin"
+    android:background = "@drawable/bg"
+    android:layout_margin="16dp"
+    android:layout_marginBottom="0dp"
     >
 
     <TextView
@@ -9,19 +14,28 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center_vertical"/>
     <TextView
         android:layout_width="0dp"
         android:layout_weight="4"
         android:layout_height="wrap_content"
         android:id="@+id/tv_item_string"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center_vertical"
+        />
 
-    <Button
+    <ImageButton
         android:id="@+id/bt_remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Remove"
-        android:layout_margin="16dp"/>
+        android:background="#00FFFFFF"
+        android:layout_margin="16dp"
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        android:layout_gravity="center_vertical"
+        />
+
 </LinearLayout>

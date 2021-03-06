@@ -1,7 +1,6 @@
 package com.example.android.mylistappinkotlin
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 
 class ListDataManager(private val context: Context) {
@@ -9,6 +8,8 @@ class ListDataManager(private val context: Context) {
     interface WorkOut {
         fun readAndSetLists()
     }
+
+
     private var listener:WorkOut = context as WorkOut
 
     fun saveList(list:TaskList){
