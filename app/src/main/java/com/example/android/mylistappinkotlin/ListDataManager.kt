@@ -34,4 +34,24 @@ class ListDataManager(private val context: Context) {
         listener.readAndSetLists()
 
     }
+
+    fun readCurrentTaskList(name:String):ArrayList<String>{
+        val sharedPreferencesContents = PreferenceManager.getDefaultSharedPreferences(context).all
+        var listOfTasks = arrayListOf<String>()
+        for(tList in sharedPreferencesContents){
+            if(tList.key.toString() == name){
+                listOfTasks= ArrayList(tList.value as HashSet<String>)
+            }
+
+        }
+        return listOfTasks
+    }
+
+    fun deleteCurrentTask(name:String,item:String){
+        val arr = readCurrentTaskList(name)
+        arr.remove(item)
+        val list = TaskList(name,arr)
+        saveList(list)
+        listener.readAndSetLists()
+    }
 }
