@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,19 +8,43 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="50dp"
+        android:id="@+id/layout_title"
+
+        >
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:background="@drawable/bg2"
+            android:cropToPadding="true"
+            android:fadingEdge="horizontal|vertical"
+            android:scaleType="centerCrop"
+            android:src="@drawable/title_background"
+            app:srcCompat="@drawable/title_background" />
         <TextView
+            android:id="@+id/tv_current_task_list_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hello"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:textSize="32dp"
+            android:textColor="#856D17" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_title"
+            />
 
 
-    </LinearLayout>
+    </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-</LinearLayout>
+</>

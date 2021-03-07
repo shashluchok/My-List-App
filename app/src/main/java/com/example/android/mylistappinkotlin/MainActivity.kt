@@ -1,5 +1,6 @@
 package com.example.android.mylistappinkotlin
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputType
@@ -9,6 +10,7 @@ import android.widget.EditText
 import android.widget.Filter
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -26,9 +28,6 @@ class MainActivity : AppCompatActivity(),ListDataManager.WorkOut  {
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             showCreateListDialog()
         }
-
-
-
 
         myList = findViewById(R.id.rv_my_recycler_view)
         myList.layoutManager = LinearLayoutManager(this)
@@ -68,9 +67,15 @@ class MainActivity : AppCompatActivity(),ListDataManager.WorkOut  {
             val recyclerAdapter = myList.adapter as ListSelectionRecyclerViewAdapter
             recyclerAdapter.addList(list)
             dialog.dismiss()
+            goToCreatedList()
         }
         builder.create().show()
+
     }
 
+    private fun goToCreatedList(){
+        val intent: Intent = Intent(this,CurrentListItemActivity::class.java)
+        ContextCompat.startActivity(this, intent, null)
+    }
 
 }
