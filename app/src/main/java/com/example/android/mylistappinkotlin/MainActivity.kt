@@ -2,6 +2,8 @@ package com.example.android.mylistappinkotlin
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.InputFilter
 import android.text.InputType
 import android.view.Menu
@@ -67,15 +69,10 @@ class MainActivity : AppCompatActivity(),ListDataManager.WorkOut  {
             val recyclerAdapter = myList.adapter as ListSelectionRecyclerViewAdapter
             recyclerAdapter.addList(list)
             dialog.dismiss()
-            goToCreatedList()
+
         }
         builder.create().show()
 
-    }
-
-    private fun goToCreatedList(){
-        val intent: Intent = Intent(this,CurrentListItemActivity::class.java)
-        ContextCompat.startActivity(this, intent, null)
     }
 
 }
