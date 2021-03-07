@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity : AppCompatActivity(),ListDataManager.WorkOut  {
+class   MainActivity : AppCompatActivity(),ListDataManager.WorkOut  {
 
     private lateinit var myList:RecyclerView
     private val listDataManager = ListDataManager(this)

@@ -6,6 +6,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class CurrentListItemActivity : AppCompatActivity() {
@@ -38,14 +39,21 @@ class CurrentListItemActivity : AppCompatActivity() {
         currentTaskListName = currentTaskList.name
         currentTaskListTasks = currentTaskList.tasks
 
-        if (!currentTaskListTasks.isEmpty())emptyMessageTextView.isVisible=false
+        recyclerViewTasks.isVisible = true
+        emptyMessageTextView.isVisible=false
 
+        if (!currentTaskListTasks.isEmpty()){
+            recyclerViewTasks.isVisible = true
+            emptyMessageTextView.isVisible=false
+        }
+
+        recyclerViewTasks.layoutManager = LinearLayoutManager(this)
+        recyclerViewTasks.adapter = CurrentListTasksAdapter(this)
 
 
 
         // Filling activity with info from the recieved object
-        taskListTitle.text = currentTaskList.name
-
+        taskListTitle.text = currentTaskListName
 
     }
 }
