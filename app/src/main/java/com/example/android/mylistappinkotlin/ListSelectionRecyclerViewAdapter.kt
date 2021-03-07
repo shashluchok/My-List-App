@@ -1,8 +1,10 @@
 package com.example.android.mylistappinkotlin
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 class ListSelectionRecyclerViewAdapter(private val lists: ArrayList<TaskList>, private val context: Context): RecyclerView.Adapter<ListSelectionViewHolder>() {
@@ -24,6 +26,10 @@ class ListSelectionRecyclerViewAdapter(private val lists: ArrayList<TaskList>, p
         holder.removeButton.setOnClickListener{
             listDataManager.deleteList(holder.listTitle.text.toString())
         }
+        holder.openButton.setOnClickListener{
+            moveToListActivity()
+        }
+
     }
 
     fun addList(list:TaskList){
@@ -31,5 +37,9 @@ class ListSelectionRecyclerViewAdapter(private val lists: ArrayList<TaskList>, p
         notifyItemInserted(lists.size-1)
     }
 
+    private fun moveToListActivity(){
+        val intent:Intent = Intent(context,CurrentListItemActivity::class.java)
+        startActivity(context,intent,null)
+    }
 
 }

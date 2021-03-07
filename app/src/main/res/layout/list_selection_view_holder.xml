@@ -1,41 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:id="@+id/layout_view_holder"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:theme="@style/Theme.MyListAppInKotlin"
-    android:background = "@drawable/bg"
     android:layout_margin="16dp"
     android:layout_marginBottom="0dp"
-    >
+    android:background="@drawable/bg"
+    android:orientation="horizontal"
+    android:theme="@style/Theme.MyListAppInKotlin">
 
     <TextView
         android:id="@+id/tv_item_number"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textColor="#FFFFFF"
-        android:layout_gravity="center_vertical"/>
-    <TextView
-        android:layout_width="0dp"
-        android:layout_weight="4"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_item_string"
-        android:layout_margin="16dp"
-        android:textColor="#FFFFFF"
         android:layout_gravity="center_vertical"
-        />
+        android:layout_margin="16dp"
+        android:layout_weight="1"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/tv_item_string"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="16dp"
+        android:layout_marginRight="0dp"
+        android:layout_weight="15"
+        android:textColor="#FFFFFF" />
+
+    <ImageButton
+        android:id="@+id/bt_open"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="5"
+        android:background="#00FFFFFF"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        app:srcCompat="@android:drawable/ic_menu_search" />
 
     <ImageButton
         android:id="@+id/bt_remove"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="#00FFFFFF"
-        android:layout_margin="16dp"
-        app:srcCompat="@android:drawable/ic_menu_delete"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        />
+        android:layout_marginLeft="0dp"
+        android:layout_weight="5"
+        android:background="@drawable/bg2"
+        android:tintMode="src_over"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
 
 </LinearLayout>
