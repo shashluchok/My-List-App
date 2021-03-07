@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CurrentListItemActivity"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".CurrentListItemActivity"
+    >
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
         android:id="@+id/layout_title"
-
-        >
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
 
 
         <ImageView
+            android:contentDescription="@string/title_background_description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
@@ -24,27 +24,76 @@
             android:cropToPadding="true"
             android:fadingEdge="horizontal|vertical"
             android:scaleType="centerCrop"
-            android:src="@drawable/title_background"
-            app:srcCompat="@drawable/title_background" />
+            android:src="@drawable/bg_title2"
+            />
+
         <TextView
             android:id="@+id/tv_current_task_list_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello"
-            android:gravity="center"
             android:layout_centerInParent="true"
-            android:textSize="32dp"
-            android:textColor="#856D17" />
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:textStyle="italic|bold" />
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/bg_title"
-            />
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_title" />
 
 
     </RelativeLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
-</>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:background="@drawable/bg"
+        android:layout_marginTop="16dp">
+
+        <EditText
+            android:autofillHints=""
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:hint="@string/what_to_do"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:inputType="text"/>
+
+        <ImageButton
+            android:contentDescription="@string/create_button"
+            android:id="@+id/bt_add_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/button"
+            android:padding="5dp"
+            android:src="@android:drawable/ic_menu_add"
+            android:tint="#3CFFFFFF" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_no_tasks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="6"
+        android:gravity="center"
+        android:text="@string/no_tasks_yet"
+        android:textColor="#34393737"
+        android:textSize="32sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_current_tasks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
+
+</LinearLayout>
