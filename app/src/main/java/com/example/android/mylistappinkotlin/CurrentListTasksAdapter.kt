@@ -3,6 +3,7 @@ package com.example.android.mylistappinkotlin
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 
 class CurrentListTasksAdapter(private val context: Context,private val name:String):RecyclerView.Adapter<CurrentListTaskViewHolder>() {

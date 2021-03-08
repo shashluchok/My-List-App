@@ -52,6 +52,9 @@ class ListDataManager(private val context: Context) {
     fun deleteCurrentTask(name: String, item: String) {
         val arr = readCurrentTaskList(name)
         arr.remove(item)
+        val x = PreferenceManager.getDefaultSharedPreferences(context).edit()
+        x.remove(name)
+        x.apply()
         val list = TaskList(name, arr)
         saveList(list)
         listener.readAndSetLists()
