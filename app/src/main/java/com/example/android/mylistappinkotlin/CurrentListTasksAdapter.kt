@@ -27,6 +27,8 @@ class CurrentListTasksAdapter(private val context: Context,private val name:Stri
         holder.deleteTaskButton.setOnClickListener{
             listDataManager.deleteCurrentTask(name,taskList[position])
         }
+
+
     }
 
     fun isEmpty():Boolean{

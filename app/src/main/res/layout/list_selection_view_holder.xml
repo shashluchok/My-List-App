@@ -26,7 +26,7 @@
         android:layout_gravity="center_vertical"
         android:layout_margin="16dp"
         android:layout_marginRight="0dp"
-        android:layout_weight="15"
+        android:layout_weight="3"
         android:textColor="#FFFFFF" />
 
     <ImageButton
@@ -34,7 +34,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        android:layout_weight="5"
+        android:layout_weight="2"
         android:background="#00FFFFFF"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
@@ -46,7 +46,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="0dp"
-        android:layout_weight="5"
+        android:layout_weight="1"
         android:background="@drawable/bg2"
         android:tintMode="src_over"
         app:srcCompat="@android:drawable/ic_menu_delete" />

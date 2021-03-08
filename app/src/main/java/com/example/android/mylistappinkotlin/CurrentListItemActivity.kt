@@ -1,12 +1,16 @@
 package com.example.android.mylistappinkotlin
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CurrentListItemActivity : AppCompatActivity(),ListDataManager.WorkOut {
 
@@ -25,6 +29,7 @@ class CurrentListItemActivity : AppCompatActivity(),ListDataManager.WorkOut {
     private lateinit var recyclerViewTasks:RecyclerView
     private lateinit var addTaskButton:ImageButton
     private lateinit var editTextNewTask:EditText
+    private lateinit var editTextLayout:LinearLayout
     private lateinit var adapterCurrent:CurrentListTasksAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +44,7 @@ class CurrentListItemActivity : AppCompatActivity(),ListDataManager.WorkOut {
         recyclerViewTasks = findViewById(R.id.recycler_view_current_tasks)
         addTaskButton = findViewById(R.id.bt_add_task)
         editTextNewTask = findViewById(R.id.et_new_task)
+        editTextLayout = findViewById(R.id.et_layout)
 
         // Taking current TaskList object from the intent
         val currentTaskList: TaskList = intent.getParcelableExtra<TaskList>(INTENT_LIST_KEY) as TaskList
@@ -60,13 +66,19 @@ class CurrentListItemActivity : AppCompatActivity(),ListDataManager.WorkOut {
         // Settin onClick Event to the button of the EditTextView (Creating and adding a task to the
         // chosen TaskList
         addTaskButton.setOnClickListener{
-            if(editTextNewTask.text.length<2){
-                Toast.makeText(this,"Слишком коротоко!",Toast.LENGTH_SHORT).show()
+            currentTaskListTasks = dataManager.readCurrentTaskList(currentTaskListName)
+            if(editTextNewTask.text.length<2) {
+                Toast.makeText(this, "Too short name!", Toast.LENGTH_SHORT).show()
+
+            }
+            else if( editTextNewTask.text.toString() in currentTaskListTasks){
+                Toast.makeText(this,"Task already exists!",Toast.LENGTH_SHORT).show()
 
             }
             else{
                 //Checking for updates of current TaskList
-                currentTaskListTasks = dataManager.readCurrentTaskList(currentTaskListName)
+
+
                 //Adding text from the EditView(EV) to the TaskList Array
                 currentTaskListTasks.add(editTextNewTask.text.toString())
 
