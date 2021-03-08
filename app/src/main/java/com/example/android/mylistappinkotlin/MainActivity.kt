@@ -17,9 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class   MainActivity : AppCompatActivity(),ListDataManager.WorkOut  {
+class MainActivity : AppCompatActivity(), ListDataManager.WorkOut {
 
-    private lateinit var myList:RecyclerView
+    private lateinit var myList: RecyclerView
     private val listDataManager = ListDataManager(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +31,7 @@ class   MainActivity : AppCompatActivity(),ListDataManager.WorkOut  {
             showCreateListDialog()
         }
 
+        //Setting a Recycler View to show User's lists
         myList = findViewById(R.id.rv_my_recycler_view)
         myList.layoutManager = LinearLayoutManager(this)
         readAndSetLists()
@@ -42,29 +43,35 @@ class   MainActivity : AppCompatActivity(),ListDataManager.WorkOut  {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         return when (item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    override fun readAndSetLists(){
-        myList.adapter = ListSelectionRecyclerViewAdapter(listDataManager.readLists(),this)
+
+    // Overriding a method from ListDataManager.WorkOut interface, so it (ListDataManager) can now
+    // call this method from its body
+    override fun readAndSetLists() {
+        myList.adapter = ListSelectionRecyclerViewAdapter(listDataManager.readLists(), this)
     }
 
-    private fun showCreateListDialog(){
+    private fun showCreateListDialog() {
         val dialogTitle = getString(R.string.name_of_list)
         val dialogConfirmation = getString(R.string.create_a_list)
         val editText = EditText(this)
         editText.inputType = InputType.TYPE_CLASS_TEXT
         editText.setHint(R.string.enter_your_list_name_here)
-        val filterArray = arrayOf(InputFilter.LengthFilter(15)as InputFilter)
 
+        //Setting max length of a title User can type in the EditTextView
+        val filterArray = arrayOf(InputFilter.LengthFilter(10) as InputFilter)
         editText.filters = filterArray
+
         val builder = AlertDialog.Builder(this).setTitle(dialogTitle).setView(editText)
-        builder.setPositiveButton(dialogConfirmation){dialog,_->
+        builder.setPositiveButton(dialogConfirmation) { dialog, _ ->
             val list = TaskList(editText.text.toString())
+
+            //Saving a list with the written title to Shared Preferences
             listDataManager.saveList(list)
             val recyclerAdapter = myList.adapter as ListSelectionRecyclerViewAdapter
             recyclerAdapter.addList(list)

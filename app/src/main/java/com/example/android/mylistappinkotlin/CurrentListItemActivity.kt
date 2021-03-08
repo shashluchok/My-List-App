@@ -45,46 +45,69 @@ class CurrentListItemActivity : AppCompatActivity(),ListDataManager.WorkOut {
         currentTaskListName = currentTaskList.name
         currentTaskListTasks = currentTaskList.tasks
 
+        // Filling the list title with info from the recieved object
+        taskListTitle.text = currentTaskListName.toUpperCase()
+
+
+        //Setting an adapter based on the intent data
         recyclerViewTasks.layoutManager = LinearLayoutManager(this)
         adapterCurrent= CurrentListTasksAdapter(this,currentTaskListName)
         recyclerViewTasks.adapter = adapterCurrent
+
+        //Checking if the Recycler View is empty
         checkIsEmpty()
 
+        // Settin onClick Event to the button of the EditTextView (Creating and adding a task to the
+        // chosen TaskList
         addTaskButton.setOnClickListener{
             if(editTextNewTask.text.length<2){
                 Toast.makeText(this,"Слишком коротоко!",Toast.LENGTH_SHORT).show()
 
             }
             else{
+                //Adding text from the EditView(EV) to the TaskList Array
                 currentTaskListTasks.add(editTextNewTask.text.toString())
+
+                // Creating a new instance of TaskList with new data
                 val taskList = TaskList(currentTaskListName,currentTaskListTasks)
+
+                // Saving new instance in Shared Preferences
+                /*
+                Shared Preferences contains only unique keys, so I will just rewrite an already
+                existing pair (key -> TaskList name,value -> tasks) with some new data (value - > tasks)
+                 */
                 dataManager.saveList(taskList)
+
+                // Updating my adapter and setting it to this activity, so new data will
+                // be shown
                 adapterCurrent= CurrentListTasksAdapter(this,currentTaskListName)
                 recyclerViewTasks.adapter = adapterCurrent
+
+                // Checking if the Recycler View is Empty. It won't be, so the Recycler is
+                // visible now
                 checkIsEmpty()
             }
         }
 
 
-
-
-
-
-
-
-
-        // Filling activity with info from the recieved object
-        taskListTitle.text = currentTaskListName.toUpperCase()
-
     }
+
+    // Overriding a method from ListDataManager.WorkOut interface, so it (ListDataManager) can now
+    // call this method from its body
 
     override fun readAndSetLists() {
+        // ListDataManager updates data in SharedPreferences, and , of course,
+        // we need to update task list with new data come from it
         adapterCurrent = CurrentListTasksAdapter(this,currentTaskListName)
         recyclerViewTasks.adapter = adapterCurrent
+
+        // We can remove and add some lists from ListDataManager class, that's why we always need
+        // to check, if the Recycler View is empty now to show EmptyMessageTextView if it is.
         checkIsEmpty()
-        adapterCurrent.printEvery()
     }
 
+
+    //A method, that shows EmptyMessameView, if the Recycler View is empty for the moment.
     private fun checkIsEmpty(){
         if (!adapterCurrent.isEmpty()){
             recyclerViewTasks.isVisible = true

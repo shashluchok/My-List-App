@@ -10,24 +10,26 @@ class ListDataManager(private val context: Context) {
     }
 
 
-    private var listener:WorkOut = context as WorkOut
+    private var listener: WorkOut = context as WorkOut
 
-    fun saveList(list:TaskList){
+    fun saveList(list: TaskList) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context).edit()
-        sharedPreferences.putStringSet(list.name,list.tasks.toHashSet())
+        sharedPreferences.putStringSet(list.name, list.tasks.toHashSet())
         sharedPreferences.apply()
     }
-    fun readLists():ArrayList<TaskList> {
+
+    fun readLists(): ArrayList<TaskList> {
         val sharedPreferencesContents = PreferenceManager.getDefaultSharedPreferences(context).all
         val listOfTaskLists = ArrayList<TaskList>()
-        for(tList in sharedPreferencesContents){
+        for (tList in sharedPreferencesContents) {
             val listHashSet = ArrayList(tList.value as HashSet<String>)
-            val list = TaskList(tList.key,listHashSet)
+            val list = TaskList(tList.key, listHashSet)
             listOfTaskLists.add(list)
         }
         return listOfTaskLists
     }
-    fun deleteList(key: String){
+
+    fun deleteList(key: String) {
         val x = PreferenceManager.getDefaultSharedPreferences(context).edit()
         x.remove(key)
         x.apply()
@@ -35,22 +37,22 @@ class ListDataManager(private val context: Context) {
 
     }
 
-    fun readCurrentTaskList(name:String):ArrayList<String>{
+    fun readCurrentTaskList(name: String): ArrayList<String> {
         val sharedPreferencesContents = PreferenceManager.getDefaultSharedPreferences(context).all
         var listOfTasks = arrayListOf<String>()
-        for(tList in sharedPreferencesContents){
-            if(tList.key.toString() == name){
-                listOfTasks= ArrayList(tList.value as HashSet<String>)
+        for (tList in sharedPreferencesContents) {
+            if (tList.key.toString() == name) {
+                listOfTasks = ArrayList(tList.value as HashSet<String>)
             }
 
         }
         return listOfTasks
     }
 
-    fun deleteCurrentTask(name:String,item:String){
+    fun deleteCurrentTask(name: String, item: String) {
         val arr = readCurrentTaskList(name)
         arr.remove(item)
-        val list = TaskList(name,arr)
+        val list = TaskList(name, arr)
         saveList(list)
         listener.readAndSetLists()
     }
