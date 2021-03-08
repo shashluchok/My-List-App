@@ -66,7 +66,7 @@ class CurrentListItemActivity : AppCompatActivity(),ListDataManager.WorkOut {
             }
             else{
                 //Adding text from the EditView(EV) to the TaskList Array
-                currentTaskListTasks.add(editTextNewTask.text.toString())
+                currentTaskListTasks.add(currentTaskListTasks.size ,editTextNewTask.text.toString())
 
                 // Creating a new instance of TaskList with new data
                 val taskList = TaskList(currentTaskListName,currentTaskListTasks)

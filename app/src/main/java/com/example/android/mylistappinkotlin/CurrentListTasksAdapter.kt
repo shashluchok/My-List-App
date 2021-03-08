@@ -29,11 +29,8 @@ class CurrentListTasksAdapter(private val context: Context,private val name:Stri
     }
 
     fun isEmpty():Boolean{
-        println(taskList.size)
         return taskList.size==0
     }
 
-    fun printEvery (){
-        println(taskList)
-    }
+
 }
