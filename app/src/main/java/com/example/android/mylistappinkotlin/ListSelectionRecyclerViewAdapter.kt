@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,11 @@ class ListSelectionRecyclerViewAdapter(private val lists: ArrayList<TaskList>, p
 
     private val listDataManager = ListDataManager(context)
 
+    interface openCurrentTaskListListener {
+        fun openCurrentTaskList(list:TaskList)
+    }
+
+    private val listener:openCurrentTaskListListener = context as openCurrentTaskListListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListSelectionViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.list_selection_view_holder,parent,false)
@@ -32,22 +38,13 @@ class ListSelectionRecyclerViewAdapter(private val lists: ArrayList<TaskList>, p
             listDataManager.deleteList(holder.listTitle.text.toString())
         }
         holder.openButton.setOnClickListener{
-            moveToListActivity(lists[position])
+            listener.openCurrentTaskList(lists[position])
         }
 
 
     }
 
-    fun addList(list:TaskList){
-        lists.add(list)
-        notifyItemInserted(lists.size-1)
-    }
 
-    private fun moveToListActivity(list:TaskList){
-        val intent = Intent(context,CurrentListItemActivity::class.java)
-        intent.putExtra(CurrentListItemActivity.INTENT_LIST_KEY,list)
-        startActivity(context,intent,null)
-    }
 
 
 

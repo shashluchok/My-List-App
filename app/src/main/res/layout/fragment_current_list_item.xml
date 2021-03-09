@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".CurrentListItemFragment"
+    >
+
+    <RelativeLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        >
+
+
+        <ImageView
+            android:contentDescription="@string/title_background_description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:background="@drawable/bg2"
+            android:cropToPadding="true"
+            android:fadingEdge="horizontal|vertical"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_title2"
+            />
+
+        <TextView
+            android:id="@+id/tv_current_task_list_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:textStyle="italic|bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_title" />
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/et_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@drawable/bg"
+        android:layout_marginTop="16dp">
+
+        <EditText
+            android:id="@+id/et_new_task"
+            android:autofillHints=""
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:hint="@string/what_to_do"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:inputType="text"/>
+
+        <ImageButton
+            android:contentDescription="@string/create_button"
+            android:id="@+id/bt_add_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/button"
+            android:padding="5dp"
+            android:src="@android:drawable/ic_menu_add"
+            android:tint="#3CFFFFFF" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_no_tasks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+
+        android:text="@string/no_tasks_yet"
+        android:textColor="#34393737"
+        android:textSize="32sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_current_tasks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
+
+</LinearLayout>

@@ -15,28 +15,32 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class ListSectionFragment : Fragment(), ListDataManager.WorkOut {
+class ListSelectionFragment : Fragment() {
 
     private lateinit var myList: RecyclerView
     private lateinit var listDataManager: ListDataManager
     private lateinit var myContext2: Context
-    private lateinit var layout:View
+    private lateinit var layout: View
+    private lateinit var taskListCreatedListener: TaskListCreatedListener
+
+    interface TaskListCreatedListener {
+        fun onTaskListCreated(taskList:TaskList)
+    }
 
     companion object {
-        fun newInstance():ListSectionFragment{
-            return ListSectionFragment()
+        fun newInstance(): ListSelectionFragment {
+            return ListSelectionFragment()
         }
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-            myContext2 = context
-            listDataManager = ListDataManager(context)
-
+        myContext2 = context
+        listDataManager = ListDataManager(context)
+        taskListCreatedListener = context as TaskListCreatedListener
 
     }
-
 
 
     override fun onCreateView(
@@ -50,34 +54,14 @@ class ListSectionFragment : Fragment(), ListDataManager.WorkOut {
             showCreateListDialog()
         }
 
+
+
         myList = layout.findViewById(R.id.rv_my_recycler_view)
         myList.layoutManager = LinearLayoutManager(myContext2)
-
-        readAndSetLists()
+        myList.adapter = ListSelectionRecyclerViewAdapter(listDataManager.readLists(), myContext2)
         return layout
     }
 
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-
-
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-    }
-
-    interface OnListItemFragmentInteractionListener {
-        fun onListItemSelected (list:TaskList)
-    }
-
-
-
-    override fun readAndSetLists() {
-        myList.adapter = ListSelectionRecyclerViewAdapter(listDataManager.readLists(), myContext2)
-    }
 
     private fun showCreateListDialog() {
         val dialogTitle = getString(R.string.name_of_list)
@@ -94,11 +78,11 @@ class ListSectionFragment : Fragment(), ListDataManager.WorkOut {
         builder.setPositiveButton(dialogConfirmation) { dialog, _ ->
             val list = TaskList(editText.text.toString())
 
-            //Saving a list with the written title to Shared Preferences
-            listDataManager.saveList(list)
+            taskListCreatedListener.onTaskListCreated(list)
 
-            val recyclerAdapter = myList.adapter as ListSelectionRecyclerViewAdapter
-            recyclerAdapter.addList(list)
+            //Saving a list with the written title to Shared Preferences
+            listDataManager.saveListAndUpdate(list)
+
             dialog.dismiss()
 
         }

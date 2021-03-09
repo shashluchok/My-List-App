@@ -12,13 +12,14 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.MyListAppInKotlin.AppBarOverlay">
+        android:theme="@style/Theme.MyListAppInKotlin.AppBarOverlay"
+        android:background="#72348A">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="#72348A"
             app:popupTheme="@style/Theme.MyListAppInKotlin.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>

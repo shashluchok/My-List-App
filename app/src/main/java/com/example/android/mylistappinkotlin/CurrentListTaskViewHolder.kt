@@ -10,5 +10,5 @@ class CurrentListTaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVi
     val count = itemView.findViewById<TextView>(R.id.tv_current_task_list_item_count) as TextView
     val value = itemView.findViewById<TextView>(R.id.tv_current_task_list_item_value) as TextView
     val deleteTaskButton: ImageButton = itemView.findViewById(R.id.button_delete_current_task)
-
+    val layout = itemView.findViewById<LinearLayout>(R.id.layout_current_list_item) as LinearLayout
 }

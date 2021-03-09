@@ -12,10 +12,11 @@ class ListDataManager(private val context: Context) {
 
     private var listener: WorkOut = context as WorkOut
 
-    fun saveList(list: TaskList) {
+    fun saveListAndUpdate(list: TaskList) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context).edit()
         sharedPreferences.putStringSet(list.name, list.tasks.toHashSet())
         sharedPreferences.apply()
+        listener.readAndSetLists()
     }
 
     fun readLists(): ArrayList<TaskList> {
@@ -42,7 +43,7 @@ class ListDataManager(private val context: Context) {
         var listOfTasks = arrayListOf<String>()
         for (tList in sharedPreferencesContents) {
             if (tList.key.toString() == name) {
-                listOfTasks = ArrayList(tList.value as HashSet<String>)
+                listOfTasks = ArrayList(tList.value!! as HashSet<String>)
             }
 
         }
@@ -56,7 +57,6 @@ class ListDataManager(private val context: Context) {
         x.remove(name)
         x.apply()
         val list = TaskList(name, arr)
-        saveList(list)
-        listener.readAndSetLists()
+        saveListAndUpdate(list)
     }
 }
