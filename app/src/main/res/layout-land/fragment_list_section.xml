@@ -22,7 +22,7 @@
         android:id="@+id/tv_create_a_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/create_task_list"
+        android:background="@drawable/create_task_list_land"
         android:backgroundTint="#75FFFFFF"
         android:backgroundTintMode="src_atop"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -9,10 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import org.w3c.dom.Text
 
 
 class ListSelectionFragment : Fragment() {
@@ -22,6 +25,7 @@ class ListSelectionFragment : Fragment() {
     private lateinit var myContext2: Context
     private lateinit var layout: View
     private lateinit var taskListCreatedListener: TaskListCreatedListener
+    private var  taskCreateTextView: TextView? = null
 
     interface TaskListCreatedListener {
         fun onTaskListCreated(taskList:TaskList)
@@ -54,10 +58,22 @@ class ListSelectionFragment : Fragment() {
             showCreateListDialog()
         }
 
+        if(layout.findViewById(R.id.tv_create_a_task) as TextView? != null){
 
+        taskCreateTextView = layout.findViewById(R.id.tv_create_a_task) as TextView
+        }
 
         myList = layout.findViewById(R.id.rv_my_recycler_view)
         myList.layoutManager = LinearLayoutManager(myContext2)
+
+        if(listDataManager.readLists().isEmpty()&& taskCreateTextView!=null){
+            myList.isVisible = false
+            (taskCreateTextView)?.isVisible = true
+        }
+        else{
+            myList.isVisible = true
+            (taskCreateTextView)?.isVisible = false
+        }
         myList.adapter = ListSelectionRecyclerViewAdapter(listDataManager.readLists(), myContext2)
         return layout
     }

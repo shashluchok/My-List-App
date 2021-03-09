@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity(), ListDataManager.WorkOut,
 
     private lateinit var listDataManager:ListDataManager
 
+    private var fragContainer:FrameLayout? = null
+
 
     companion object {
         const val TASKLIST_KEY = "TASK_LIST_KEY"
@@ -27,16 +29,21 @@ class MainActivity : AppCompatActivity(), ListDataManager.WorkOut,
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
+        fragContainer = findViewById<FrameLayout>(R.id.fl_fragment_container_main_current)
+
         listDataManager = ListDataManager(this)
-        if(savedInstanceState!=null){
+
+
+        if (fragContainer != null){
+            if(savedInstanceState!=null){
             currentTaskList = savedInstanceState.getParcelable(TASKLIST_KEY)
 
-        }
-        else {
-            if (findViewById<FrameLayout>(R.id.fl_fragment_container_main_current) != null) {
+            }
+            else {
                 showEmptyMessageFragment()
             }
         }
+
         readAndSetLists()
 
 
@@ -48,7 +55,8 @@ class MainActivity : AppCompatActivity(), ListDataManager.WorkOut,
         supportFragmentManager.beginTransaction()
             .replace(R.id.fl_fragment_container, frag)
             .commit()
-        updateCurrentTaskList()
+
+        if(fragContainer!=null)updateCurrentTaskList()
 
 
     }
@@ -64,7 +72,7 @@ class MainActivity : AppCompatActivity(), ListDataManager.WorkOut,
 
     override fun openCurrentTaskList(list: TaskList) {
         when {
-            (findViewById<FrameLayout>(R.id.fl_fragment_container_main_current) == null) -> {
+            (fragContainer == null) -> {
                 val intent = Intent(this, CurrentListItemActivity::class.java)
                 intent.putExtra(CurrentListItemActivity.INTENT_LIST_KEY, list)
                 ContextCompat.startActivity(this, intent, null)
@@ -75,25 +83,28 @@ class MainActivity : AppCompatActivity(), ListDataManager.WorkOut,
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fl_fragment_container_main_current, frag)
                     .commit()
+                currentTaskList = list
 
             }
         }
-        currentTaskList = list
+
     }
 
     private fun updateCurrentTaskList(){
-        if(currentTaskList!=null) {
-            val frag = CurrentListItemFragment.newInstance()
-            frag.setCurrentTaskList(currentTaskList as TaskList)
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fl_fragment_container_main_current, frag)
-                .commit()
-            val arr = arrayListOf<String>()
-                for(cur in listDataManager.readLists()){
+        if(fragContainer!=null) {
+            if (currentTaskList != null) {
+                val frag = CurrentListItemFragment.newInstance()
+                frag.setCurrentTaskList(currentTaskList as TaskList)
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fl_fragment_container_main_current, frag)
+                    .commit()
+                val arr = arrayListOf<String>()
+                for (cur in listDataManager.readLists()) {
                     arr.add(cur.name)
                 }
-            if((currentTaskList as TaskList).name  !in arr){
-                showEmptyMessageFragment()
+                if ((currentTaskList as TaskList).name !in arr) {
+                    showEmptyMessageFragment()
+                }
             }
         }
     }

@@ -11,14 +11,14 @@
     <RelativeLayout
         android:id="@+id/layout_title"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         >
 
 
         <ImageView
             android:contentDescription="@string/title_background_description"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
             android:adjustViewBounds="true"
             android:background="@drawable/bg2"
             android:cropToPadding="true"
@@ -30,7 +30,7 @@
         <TextView
             android:id="@+id/tv_current_task_list_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_centerInParent="true"
             android:gravity="center"
             android:textColor="#FFFFFF"
@@ -39,7 +39,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
             android:background="@drawable/bg_title" />
 
 

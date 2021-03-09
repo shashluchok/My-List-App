@@ -17,9 +17,9 @@ class CurrentListItemActivity : AppCompatActivity(), ListDataManager.WorkOut {
         if(intent!=null) {
             readAndSetLists()
         }
-        else{
-            showEmptyMessage()
-        }
+//        else{
+//            showEmptyMessage()
+//        }
 
     }
 
@@ -36,12 +36,12 @@ class CurrentListItemActivity : AppCompatActivity(), ListDataManager.WorkOut {
 
     }
 
-    private fun showEmptyMessage(){
-
-        val emptyTaskListFragment = EmptyTaskListFragment.newInstance()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fl_fragment_container_current_list, emptyTaskListFragment)
-            .commit()
-    }
+//    private fun showEmptyMessage(){
+//
+//        val emptyTaskListFragment = EmptyTaskListFragment.newInstance()
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.fl_fragment_container_current_list, emptyTaskListFragment)
+//            .commit()
+//    }
 
 }
