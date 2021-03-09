@@ -21,4 +21,7 @@
     <string name="create_task_button">Create task button</string>
     <string name="my_lists">My lists:</string>
     <string name="current_list">Current list:</string>
+    <string name="delete_button">Delete button</string>
+    <string name="open_current_task_list_button">Open current task list button</string>
+    <string name="delete_current_task_list_button">Delete current task list button</string>
 </resources>

@@ -122,17 +122,6 @@ class MainActivity : AppCompatActivity(), ListDataManager.WorkOut,
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-
-
-
     // --------------MENU-OVER-------------------
 
     override fun onTaskListCreated(taskList: TaskList) {

@@ -11,15 +11,15 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#72348A"
-        android:theme="@style/Theme.MyListAppInKotlin.AppBarOverlay">
+        android:background="@color/primaryColor"
+        >
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#72348A"
-            app:popupTheme="@style/Theme.MyListAppInKotlin.PopupOverlay" />
+            app:titleTextColor="@color/primaryTextColor"
+            />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -31,7 +31,7 @@
         android:fontFamily="cursive"
         android:gravity="center"
         android:text="@string/my_lists"
-        android:textColor="#72348A"
+        android:textColor="@color/primaryDarkColor"
         android:textSize="32sp" />
 
 

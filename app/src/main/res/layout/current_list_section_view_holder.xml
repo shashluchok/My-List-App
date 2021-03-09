@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg"
     android:orientation="horizontal"
-    android:paddingLeft="16dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="0dp"
     android:layout_marginTop="16dp"
     android:id="@+id/layout_current_list_item"
     >
@@ -23,14 +24,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_weight="5"
         android:textColor="#FFFFFF" />
 
     <ImageButton
+        android:contentDescription="@string/delete_button"
         android:id="@+id/button_delete_current_task"
         android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="0dp"

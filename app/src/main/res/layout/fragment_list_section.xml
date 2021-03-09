@@ -40,7 +40,7 @@
         android:clickable="true"
         android:focusable="true"
         android:contentDescription="@string/create_task_button"
-        app:backgroundTint="#72348A"
+        app:background="@color/secondaryColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
