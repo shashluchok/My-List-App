@@ -51,7 +51,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:background="@drawable/bg"
         android:layout_marginTop="16dp">
 
         <EditText
@@ -65,7 +64,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="16dp"
             android:inputType="text"
-            android:textColor="@color/primaryTextColor"/>
+            android:textColor="@color/secondaryTextColor"/>
 
         <ImageButton
             android:contentDescription="@string/create_button"
